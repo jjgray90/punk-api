@@ -1,9 +1,11 @@
-import logo from "./logo.svg";
 import "./App.scss";
 import { useEffect, useState } from "react";
+import Main from "./containers/Main/Main";
+import Navbar from "./containers/Navbar/Navbar";
 
 const App = () => {
-  const [beers, setBeers] = useState({});
+  const [beers, setBeers] = useState();
+  const [apiCall, setApiCall] = useState(false);
 
   const getBeers = async () => {
     try {
@@ -14,6 +16,7 @@ const App = () => {
       }
       const data = await response.json();
       setBeers(data);
+      setApiCall(true);
     } catch (error) {
       alert(error.message);
     }
@@ -26,22 +29,12 @@ const App = () => {
   console.log(beers);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <section className="app">
+      <div className="app__nav">
+        <Navbar />
+      </div>
+      <div className="app__main">{apiCall && <Main beers={beers} />}</div>
+    </section>
   );
 };
 
