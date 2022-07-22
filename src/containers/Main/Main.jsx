@@ -5,7 +5,6 @@ const Main = ({ beers }) => {
   return (
     <>
       <CardList beers={beers} />
-      <p>hiya</p>
     </>
   );
 };

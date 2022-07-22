@@ -21,7 +21,7 @@ const App = () => {
       alert(error.message);
     }
   };
-
+  
   useEffect(() => {
     getBeers();
   }, []);
