@@ -17,7 +17,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "mkrc": "./node_modules/.bin/mkrc"
   },
   "eslintConfig": {
     "extends": [
@@ -39,6 +40,7 @@
   },
   "devDependencies": {
     "gh-pages": "^4.0.0",
-    "sass": "^1.53.0"
+    "sass": "^1.53.0",
+    "mkrc-dan-test": "^0.0.1"
   }
 }
