@@ -1,0 +1,9 @@
+@use "../../assets/sass/variables" as *;
+
+.button {
+  cursor: pointer;
+  border: none;
+  padding: 0.5rem 1rem;
+  background-color: $color-primary;
+  box-shadow: 2px 2px 0 whitesmoke;
+}

@@ -1,4 +1,5 @@
 import "./Card.scss";
+import Button from "../Button/Button";
 
 const Card = ({ beer }) => {
   return (
@@ -8,6 +9,7 @@ const Card = ({ beer }) => {
         <h2 className="hidden__heading">{beer.name}</h2>
         <p>{beer.abv}% ABV</p>
         <p>{beer.tagline}</p>
+        <Button buttonText="Discover More" />
       </div>
     </section>
   );

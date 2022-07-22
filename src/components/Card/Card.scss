@@ -1,7 +1,16 @@
+@use "../../assets/sass/variables" as *;
+
 .card {
   padding: 1rem;
-  background-color: whitesmoke;
-  box-shadow: 2px 2px 2px grey;
+  //   background-image: linear-gradient(
+  //     to bottom right,
+  //     $text-primary,
+  //     $color-primary,
+  //     $color-primary,
+  //     $text-primary
+  //   );
+  //   background-color: lightblue;
+  //   box-shadow: 2px 2px 2px grey;
   width: 200px;
   height: 300px;
   display: flex;
@@ -11,6 +20,7 @@
 
   &__image {
     height: 250px;
+    filter: drop-shadow(2px 2px 0px whitesmoke);
   }
 
   &__hidden {
