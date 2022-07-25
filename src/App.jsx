@@ -5,21 +5,19 @@ import Navbar from "./containers/Navbar/Navbar";
 
 const App = () => {
   const [beers, setBeers] = useState();
-  const [apiCall, setApiCall] = useState(false);
-  const [params, setParams] = useState("?abv_gt=6");
-
-  console.log(params);
+  const [params, setParams] = useState("");
 
   const getBeers = async () => {
     try {
-      const response = await fetch("https://api.punkapi.com/v2/beers" + params);
+      const response = await fetch(
+        "https://api.punkapi.com/v2/beers?" + params
+      );
 
       if (!response.ok) {
         throw new Error(response.status + " error with request");
       }
       const data = await response.json();
       setBeers(data);
-      setApiCall(true);
     } catch (error) {
       alert(error.message);
     }
@@ -27,15 +25,14 @@ const App = () => {
 
   useEffect(() => {
     getBeers();
-    
-  }, []);
+  }, [params]);
 
   return (
     <section className="app">
       <div className="app__nav">
         <Navbar params={params} setParams={setParams} />
       </div>
-      <div className="app__main">{apiCall && <Main beers={beers} />}</div>
+      <div className="app__main">{beers && <Main beers={beers} />}</div>
     </section>
   );
 };
