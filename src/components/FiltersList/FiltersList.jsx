@@ -5,6 +5,12 @@ import FilterItem from "../FilterItem/FilterItem";
 const FiltersList = ({ params, setParams }) => {
   const [paramsObj, setParamsObj] = useState();
 
+
+
+
+
+
+  
   return (
     <section className="filters-list">
       <FilterItem

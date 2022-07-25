@@ -20,9 +20,11 @@ const FilterItem = ({
 
   const removeKey = () => {
     setParamsObj((currentState) => {
-      const { value, ...rest } = currentState;
-      setParams(new URLSearchParams(rest).toString());
-      return rest;
+      const newObj = { ...currentState };
+      delete newObj[Object.keys(value)[0]];
+      //   const { value, ...rest } = currentState;
+      setParams(new URLSearchParams(newObj).toString());
+      return newObj;
     });
   };
 
