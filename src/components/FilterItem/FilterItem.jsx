@@ -1,4 +1,6 @@
 const FilterItem = ({ name, setChecked, setValue, value }) => {
+ 
+ 
   const clickEvent = (e) => {
     setChecked(e.target.checked);
     setValue(value);
