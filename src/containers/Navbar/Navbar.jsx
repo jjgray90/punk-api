@@ -1,12 +1,11 @@
 import "./Navbar.scss";
 import FiltersList from "../../components/FiltersList/FiltersList";
 
-const Navbar = ({ setChecked, setValue, handleSearchInput }) => {
+const Navbar = ({ handleSearchInput, handleCheckInput }) => {
   return (
     <FiltersList
-      setChecked={setChecked}
-      setValue={setValue}
       handleSearchInput={handleSearchInput}
+      handleCheckInput={handleCheckInput}
     />
   );
 };

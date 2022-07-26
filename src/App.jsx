@@ -26,24 +26,29 @@ const App = () => {
     }
   };
 
-  const getQueryParams = (obj) => new URLSearchParams(obj).toString();
+  const getQueryParams = (obj) =>
+    setParams(new URLSearchParams(obj).toString());
 
   const addKey = (val) => {
     setParamsObj((currentState) => {
       const newObj = { ...currentState, ...val };
-      setParams(getQueryParams(newObj));
+      getQueryParams(newObj);
       return newObj;
     });
   };
 
   const removeKey = (val) => {
     setParamsObj((currentState) => {
-      console.log(val);
       const newObj = { ...currentState };
       delete newObj[Object.keys(val)[0]];
-      setParams(getQueryParams(newObj));
+      getQueryParams(newObj);
       return newObj;
     });
+  };
+
+  const handleCheckInput = (event, obj) => {
+    setChecked(event.target.checked);
+    setValue(obj);
   };
 
   const handleSearchInput = (event) => {
@@ -60,22 +65,19 @@ const App = () => {
   }, [params]);
 
   useEffect(() => {
-    if (value) {
-      addKey(value);
-    }
+    addKey(value);
     if (!checked && paramsObj) {
       removeKey(value);
     }
+    // eslint-disable-next-line
   }, [checked, value]);
 
   return (
     <section className="app">
       <div className="app__nav">
         <Navbar
-          params={params}
-          setChecked={setChecked}
-          setValue={setValue}
           handleSearchInput={handleSearchInput}
+          handleCheckInput={handleCheckInput}
         />
       </div>
       <div className="app__main">{beers && <Main beers={beers} />}</div>
