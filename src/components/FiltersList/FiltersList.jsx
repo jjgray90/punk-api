@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./FiltersList.scss";
 import FilterItem from "../FilterItem/FilterItem";
+import SearchBox from "../SearchBox/SearchBox";
 
 const FiltersList = ({ setParams }) => {
   const [paramsObj, setParamsObj] = useState();
@@ -9,54 +10,56 @@ const FiltersList = ({ setParams }) => {
 
   const getQueryParams = (obj) => new URLSearchParams(obj).toString();
 
-  const addKey = () => {
+  const addKey = (val) => {
     setParamsObj((currentState) => {
-      const newObj = { ...currentState, ...value };
+      const newObj = { ...currentState, ...val };
       setParams(getQueryParams(newObj));
       return newObj;
     });
   };
 
-  const removeKey = () => {
+  const removeKey = (val) => {
     setParamsObj((currentState) => {
       const newObj = { ...currentState };
-      delete newObj[Object.keys(value)[0]];
+      delete newObj[Object.keys(val)[0]];
       setParams(getQueryParams(newObj));
       return newObj;
     });
+  };
+
+  const handleSearchInput = (event) => {
+    if (event.target.value.length < 1) {
+      setChecked(false);
+    } else {
+      setChecked(true);
+      setValue({ beer_name: event.target.value });
+    }
   };
 
   useEffect(() => {
-    if (checked) {
-      addKey();
+    if (value) {
+      addKey(value);
     }
     if (!checked && paramsObj) {
-      removeKey();
+      removeKey(value);
     }
-  }, [checked]);
+  }, [checked, value]);
 
   return (
     <section className="filters-list">
       <FilterItem
-        type="checkbox"
         name="High ABV (>6.0%)"
         value={{ abv_gt: 6 }}
-        setParams={setParams}
-        paramsObj={paramsObj}
-        setParamsObj={setParamsObj}
         setChecked={setChecked}
         setValue={setValue}
       />
       <FilterItem
-        type="checkbox"
         name="Low ABV (<4.0%)"
         value={{ abv_lt: 4 }}
-        setParams={setParams}
-        paramsObj={paramsObj}
-        setParamsObj={setParamsObj}
         setChecked={setChecked}
         setValue={setValue}
       />
+      <SearchBox name="Search By Name" onChange={handleSearchInput} />
     </section>
   );
 };

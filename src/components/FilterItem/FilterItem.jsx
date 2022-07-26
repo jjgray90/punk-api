@@ -1,4 +1,4 @@
-const FilterItem = ({ type, name, setChecked, setValue, value }) => {
+const FilterItem = ({ name, setChecked, setValue, value }) => {
   const clickEvent = (e) => {
     setChecked(e.target.checked);
     setValue(value);
@@ -7,7 +7,7 @@ const FilterItem = ({ type, name, setChecked, setValue, value }) => {
   return (
     <section className="filter-item">
       <label htmlFor={name}>{name}</label>
-      <input type={type} name={name} onChange={clickEvent} />
+      <input type="checkbox" name={name} onChange={clickEvent} />
     </section>
   );
 };

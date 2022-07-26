@@ -7,10 +7,10 @@ const App = () => {
   const [beers, setBeers] = useState();
   const [params, setParams] = useState("");
 
-  const getBeers = async () => {
+  const getBeers = async (parameters) => {
     try {
       const response = await fetch(
-        "https://api.punkapi.com/v2/beers?" + params
+        `https://api.punkapi.com/v2/beers?${parameters}`
       );
 
       if (!response.ok) {
@@ -24,7 +24,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    getBeers();
+    getBeers(params);
   }, [params]);
 
   return (
