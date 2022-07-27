@@ -6,8 +6,7 @@ import Navbar from "./containers/Navbar/Navbar";
 const App = () => {
   const [beers, setBeers] = useState();
   const [params, setParams] = useState("");
-  const [paramsObj, setParamsObj] = useState();
-  const [checked, setChecked] = useState();
+  const [, setParamsObj] = useState();
   const [value, setValue] = useState();
 
   const getBeers = async (parameters) => {
@@ -26,36 +25,28 @@ const App = () => {
     }
   };
 
-  const getQueryParams = (obj) =>
+  const updateQueryParams = (obj) =>
     setParams(new URLSearchParams(obj).toString());
-
-  const addKey = (val) => {
-    setParamsObj((currentState) => {
-      const newObj = { ...currentState, ...val };
-      getQueryParams(newObj);
-      return newObj;
-    });
-  };
 
   const removeKey = (val) => {
     setParamsObj((currentState) => {
       const newObj = { ...currentState };
       delete newObj[Object.keys(val)[0]];
-      getQueryParams(newObj);
+      updateQueryParams(newObj);
       return newObj;
     });
   };
 
   const handleCheckInput = (event, obj) => {
-    setChecked(event.target.checked);
-    setValue(obj);
+    if (!event.target.checked) {
+      removeKey(obj);
+    } else setValue(obj);
   };
 
   const handleSearchInput = (event) => {
     if (event.target.value.length < 1) {
       removeKey({ beer_name: event.target.value });
     } else {
-      setChecked(true);
       setValue({ beer_name: event.target.value });
     }
   };
@@ -65,12 +56,16 @@ const App = () => {
   }, [params]);
 
   useEffect(() => {
+    const addKey = (val) => {
+      setParamsObj((currentState) => {
+        const newObj = { ...currentState, ...val };
+        updateQueryParams(newObj);
+        return newObj;
+      });
+    };
+
     addKey(value);
-    if (!checked && paramsObj) {
-      removeKey(value);
-    }
-    // eslint-disable-next-line
-  }, [checked, value]);
+  }, [value]);
 
   return (
     <section className="app">
