@@ -3,8 +3,12 @@ import "./SearchBox.scss";
 const SearchBox = ({ name, onChange }) => {
   return (
     <section className="search-box">
-      <label htmlFor={name}>{name}</label>
-      <input type="text" name={name} onChange={onChange} />
+      <input
+        className="search-box__input"
+        type="text"
+        placeholder={name}
+        onChange={onChange}
+      />
     </section>
   );
 };

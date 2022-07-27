@@ -1,0 +1,9 @@
+.filter-item {
+  display: flex;
+  justify-content: space-between;
+  width: 150px;
+
+  &__label {
+    font-size: 16px;
+  }
+}

@@ -3,10 +3,12 @@ import "./Main.scss";
 
 const Main = ({ beers }) => {
   return (
-    <section className="main">
-      <h1>BEER</h1>
-      <CardList beers={beers} />
-    </section>
+    <>
+      <section className="main">
+        <CardList beers={beers} />
+      </section>
+      <div className="main-img"></div>
+    </>
   );
 };
 

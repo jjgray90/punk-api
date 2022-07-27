@@ -6,7 +6,7 @@ const FiltersList = ({ handleSearchInput, handleCheckInput }) => {
   return (
     <section className="filters-list">
       <FilterItem
-        name="High ABV (>6.0%)"
+        name="High ABV"
         onChange={(event) => handleCheckInput(event, { abv_gt: 6 })}
       />
       <FilterItem
