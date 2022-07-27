@@ -12,7 +12,7 @@ const FiltersList = ({ handleSearchInput, handleCheckInput }) => {
       <FilterItem
         name="Classic Range"
         onChange={(event) =>
-          handleCheckInput(event, { brewed_before: "10-2010" })
+          handleCheckInput(event, { brewed_before: "01-2010" })
         }
       />
       <SearchBox name="Search By Name" onChange={handleSearchInput} />

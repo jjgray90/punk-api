@@ -9,6 +9,8 @@ const App = () => {
   const [, setParamsObj] = useState();
   const [value, setValue] = useState();
 
+  // fetch beers with given parameters
+
   const getBeers = async (parameters) => {
     try {
       const response = await fetch(
@@ -25,8 +27,12 @@ const App = () => {
     }
   };
 
+  // convert object to query params
+
   const updateQueryParams = (obj) =>
     setParams(new URLSearchParams(obj).toString());
+
+  // remove a key:value pair from the param object
 
   const removeKey = (val) => {
     setParamsObj((currentState) => {
@@ -37,11 +43,15 @@ const App = () => {
     });
   };
 
+  // handle the checkbox inputs
+
   const handleCheckInput = (event, obj) => {
     if (!event.target.checked) {
       removeKey(obj);
     } else setValue(obj);
   };
+
+  //handle the search bar inputs
 
   const handleSearchInput = (event) => {
     if (event.target.value.length < 1) {
@@ -51,9 +61,13 @@ const App = () => {
     }
   };
 
+  // fetch beers after every state change on params
+
   useEffect(() => {
     getBeers(params);
   }, [params]);
+
+  // add key:value pair to paramObj whenever value state updates
 
   useEffect(() => {
     const addKey = (val) => {
