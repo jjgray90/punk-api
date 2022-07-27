@@ -8,6 +8,7 @@ const App = () => {
   const [params, setParams] = useState("");
   const [, setParamsObj] = useState();
   const [value, setValue] = useState();
+  const [pageNum, setPageNum] = useState(1);
 
   // fetch beers with given parameters
 
@@ -51,6 +52,14 @@ const App = () => {
     } else setValue(obj);
   };
 
+  // handle pagination
+
+  const handlePagination = (symbol) => {
+    if (symbol === "+") {
+      setPageNum(pageNum + 1);
+    } else setPageNum(pageNum - 1);
+  };
+
   //handle the search bar inputs
 
   const handleSearchInput = (event) => {
@@ -66,6 +75,12 @@ const App = () => {
   useEffect(() => {
     getBeers(params);
   }, [params]);
+
+  // update values once pageNum state is updated
+
+  useEffect(() => {
+    setValue({ page: pageNum });
+  }, [pageNum]);
 
   // add key:value pair to paramObj whenever value state updates
 
@@ -87,6 +102,7 @@ const App = () => {
         <Navbar
           handleSearchInput={handleSearchInput}
           handleCheckInput={handleCheckInput}
+          handlePagination={handlePagination}
         />
       </div>
       <div className="app__main">{beers && <Main beers={beers} />}</div>
