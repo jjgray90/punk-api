@@ -23,6 +23,7 @@ const App = () => {
       }
       const data = await response.json();
       setBeers(data);
+      return data;
     } catch (error) {
       alert(error.message);
     }
@@ -57,7 +58,9 @@ const App = () => {
   const handlePagination = (symbol) => {
     if (symbol === "+") {
       setPageNum(pageNum + 1);
-    } else setPageNum(pageNum - 1);
+    } else if (pageNum > 1) {
+      setPageNum(pageNum - 1);
+    }
   };
 
   //handle the search bar inputs
@@ -68,6 +71,21 @@ const App = () => {
     } else {
       setValue({ beer_name: event.target.value });
     }
+  };
+
+  // fetch all beers and filter by PH
+
+  const handlePHFilter = async (event) => {
+    let num = 1;
+    let tempArray = [];
+    if (event.target.checked) {
+      while (num < 6) {
+        const data = await getBeers(`per_page=80&page=${num}&${params}`);
+        data.filter((beer) => (beer.ph <= 4 ? tempArray.push(beer) : null));
+        num += 1;
+      }
+      setBeers(tempArray);
+    } else getBeers(params);
   };
 
   // fetch beers after every state change on params
@@ -103,6 +121,7 @@ const App = () => {
           handleSearchInput={handleSearchInput}
           handleCheckInput={handleCheckInput}
           handlePagination={handlePagination}
+          handlePHFilter={handlePHFilter}
         />
       </div>
       <div className="app__main">{beers && <Main beers={beers} />}</div>

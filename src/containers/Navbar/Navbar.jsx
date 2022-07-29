@@ -2,7 +2,12 @@ import "./Navbar.scss";
 import FiltersList from "../../components/FiltersList/FiltersList";
 import Button from "../../components/Button/Button";
 
-const Navbar = ({ handleSearchInput, handleCheckInput, handlePagination }) => {
+const Navbar = ({
+  handleSearchInput,
+  handleCheckInput,
+  handlePagination,
+  handlePHFilter,
+}) => {
   return (
     <section className="navbar">
       <h1 className="heading">PUNK</h1>
@@ -10,6 +15,7 @@ const Navbar = ({ handleSearchInput, handleCheckInput, handlePagination }) => {
       <FiltersList
         handleSearchInput={handleSearchInput}
         handleCheckInput={handleCheckInput}
+        handlePHFilter={handlePHFilter}
       />
       <Button buttonText=">" onClick={() => handlePagination("+")} />
 
