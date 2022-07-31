@@ -1,12 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Chelsea+Market&family=Londrina+Solid&display=swap");
 
-// $color-primary: #b0bdf8;
-// $color-secondary: #313e78;
 // $text-primary: #555b78;
+
+@mixin img-style {
+  filter: drop-shadow(2px 2px 0px whitesmoke);
+  height: 250px;
+}
 
 $primary-font: "Chelsea Market", cursive;
 $secondary-font: "Londrina Solid", cursive;
 
 $color-primary: #d9b00b;
-$color-secondary: #313e78;
 $text-primary: #cd7a00;
+
+$card-primary: #b0bdf8;
+$card-secondary: #313e78;
+$card-tertiary: #555b78;

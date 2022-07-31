@@ -1,0 +1,93 @@
+@use "../../assets/sass/variables" as *;
+
+.card-modal {
+  background-color: rgb(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__container {
+    padding: 1rem;
+    width: 80%;
+    height: 80%;
+    background-image: linear-gradient(
+      to bottom right,
+      $card-primary,
+      $card-tertiary,
+      $card-secondary,
+      $card-tertiary,
+      $card-primary
+    );
+    color: white;
+    overflow-y: auto;
+
+    .container__content {
+      display: flex;
+      gap: 1rem;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      text-align: center;
+
+      .content__heading {
+        font-family: $primary-font;
+        font-size: 1.5rem;
+      }
+
+      .content__sub {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+
+        .sub__ital {
+          font-style: italic;
+        }
+      }
+
+      .content__img {
+        @include img-style;
+      }
+
+      .content__cross {
+        position: relative;
+        top: 0;
+        left: 45%;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      .content__food {
+        width: 100%;
+        overflow-x: auto;
+
+        .food__scroll {
+          display: flex;
+          gap: 1rem;
+          flex-direction: row;
+
+          * {
+            background-image: linear-gradient(
+              to bottom right,
+              $color-primary,
+              $text-primary,
+              $text-primary,
+              $color-primary
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.3rem;
+            min-width: 170px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -2,15 +2,6 @@
 
 .card {
   padding: 1rem;
-  //   background-image: linear-gradient(
-  //     to bottom right,
-  //     $text-primary,
-  //     $color-primary,
-  //     $color-primary,
-  //     $text-primary
-  //   );
-  //   background-color: lightblue;
-  //   box-shadow: 2px 2px 2px grey;
   width: 200px;
   height: 300px;
   display: flex;
@@ -18,9 +9,12 @@
   justify-content: space-around;
   align-items: center;
 
+  &__heading {
+    font-family: $primary-font;
+  }
+
   &__image {
-    height: 250px;
-    filter: drop-shadow(2px 2px 0px whitesmoke);
+    @include img-style;
   }
 
   &__hidden {
@@ -37,6 +31,7 @@
     text-align: center;
 
     .hidden__heading {
+      font-family: $primary-font;
       font-size: 1rem;
     }
   }
