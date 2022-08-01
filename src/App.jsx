@@ -29,38 +29,12 @@ const App = () => {
     }
   };
 
-  // convert object to query params
-
-  const updateQueryParams = (obj) =>
-    setParams(new URLSearchParams(obj).toString());
-
-  // remove a key:value pair from the param object
-
-  const removeKey = (val) => {
-    setParamsObj((currentState) => {
-      const newObj = { ...currentState };
-      delete newObj[Object.keys(val)[0]];
-      updateQueryParams(newObj);
-      return newObj;
-    });
-  };
-
   // handle the checkbox inputs
 
   const handleCheckInput = (event, obj) => {
     if (!event.target.checked) {
       removeKey(obj);
     } else setValue(obj);
-  };
-
-  // handle pagination
-
-  const handlePagination = (symbol) => {
-    if (symbol === "+") {
-      setPageNum(pageNum + 1);
-    } else if (pageNum > 1) {
-      setPageNum(pageNum - 1);
-    }
   };
 
   //handle the search bar inputs
@@ -78,9 +52,10 @@ const App = () => {
   const handlePHFilter = async (event) => {
     let num = 1;
     let tempArray = [];
+    let data = await getBeers(params);
     if (event.target.checked) {
-      while (num < 6) {
-        const data = await getBeers(`per_page=80&page=${num}&${params}`);
+      while (data.length > 0) {
+        data = await getBeers(`per_page=80&page=${num}&${params}`);
         data.filter((beer) => (beer.ph <= 4 ? tempArray.push(beer) : null));
         num += 1;
       }
@@ -88,17 +63,20 @@ const App = () => {
     } else getBeers(params);
   };
 
-  // fetch beers after every state change on params
+  // handle pagination
 
-  useEffect(() => {
-    getBeers(params);
-  }, [params]);
+  const handlePagination = (symbol) => {
+    if (symbol === "+") {
+      setPageNum(pageNum + 1);
+    } else if (pageNum > 1) {
+      setPageNum(pageNum - 1);
+    }
+  };
 
-  // update values once pageNum state is updated
+  // convert object to query params
 
-  useEffect(() => {
-    setValue({ page: pageNum });
-  }, [pageNum]);
+  const updateQueryParams = (obj) =>
+    setParams(new URLSearchParams(obj).toString());
 
   // add key:value pair to paramObj whenever value state updates
 
@@ -113,6 +91,29 @@ const App = () => {
 
     addKey(value);
   }, [value]);
+
+  // remove a key:value pair from the param object
+
+  const removeKey = (val) => {
+    setParamsObj((currentState) => {
+      const newObj = { ...currentState };
+      delete newObj[Object.keys(val)[0]];
+      updateQueryParams(newObj);
+      return newObj;
+    });
+  };
+
+  // fetch beers after every state change on params
+
+  useEffect(() => {
+    getBeers(params);
+  }, [params]);
+
+  // update values once pageNum state is updated
+
+  useEffect(() => {
+    setValue({ page: pageNum });
+  }, [pageNum]);
 
   return (
     <section className="app">
