@@ -15,6 +15,7 @@
   &__container {
     padding: 1rem;
     width: 80%;
+    max-width: 500px;
     height: 80%;
     background-image: linear-gradient(
       to bottom right,
@@ -28,6 +29,7 @@
     overflow-y: auto;
 
     .container__content {
+      height: 100%;
       display: flex;
       gap: 1rem;
       flex-direction: column;
@@ -64,11 +66,14 @@
         }
       }
       .content__food {
+        height: 90px;
         width: 100%;
         overflow-x: auto;
 
         .food__scroll {
           display: flex;
+          height: 70px;
+          // height: 100px;
           gap: 1rem;
           flex-direction: row;
 
