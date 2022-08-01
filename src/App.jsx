@@ -78,19 +78,6 @@ const App = () => {
   const updateQueryParams = (obj) =>
     setParams(new URLSearchParams(obj).toString());
 
-  // add key:value pair to paramObj whenever value state updates
-
-  useEffect(() => {
-    const addKey = (val) => {
-      setParamsObj((currentState) => {
-        const newObj = { ...currentState, ...val };
-        updateQueryParams(newObj);
-        return newObj;
-      });
-    };
-
-    addKey(value);
-  }, [value]);
 
   // remove a key:value pair from the param object
 
@@ -102,6 +89,20 @@ const App = () => {
       return newObj;
     });
   };
+
+   // add key:value pair to paramObj whenever value state updates
+
+   useEffect(() => {
+    const addKey = (val) => {
+      setParamsObj((currentState) => {
+        const newObj = { ...currentState, ...val };
+        updateQueryParams(newObj);
+        return newObj;
+      });
+    };
+
+    addKey(value);
+  }, [value]);
 
   // fetch beers after every state change on params
 
